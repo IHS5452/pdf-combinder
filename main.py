@@ -1,11 +1,11 @@
 import os
-from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfMerger
 
 def combine_pdfs(directory):
     pdf_files = [file for file in os.listdir(directory) if file.endswith('.pdf')]
     pdf_files.sort(key=lambda x: int(x.split('.')[0]))
 
-    merger = PdfFileMerger()
+    merger = PdfMerger()
 
     for file in pdf_files:
         filepath = os.path.join(directory, file)
