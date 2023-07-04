@@ -1,15 +1,20 @@
-import os
 from PyPDF2 import PdfMerger
 
-def combine_pdfs(directory):
-    pdf_files = [file for file in os.listdir(directory) if file.endswith('.pdf')]
-    pdf_files.sort(key=lambda x: int(x.split('.')[0]))
-
+def combine_pdfs():
     merger = PdfMerger()
+    file_number = 1
 
-    for file in pdf_files:
-        filepath = os.path.join(directory, file)
-        merger.append(filepath)
+    while True:
+        file_path = input(f"Enter path for PDF #{file_number} (or 'done' to finish): ")
+        if file_path.lower() == "done":
+            break
+
+        try:
+            merger.append(file_path)
+            print(f"PDF #{file_number} added successfully.")
+            file_number += 1
+        except FileNotFoundError:
+            print("File not found. Please enter a valid file path.")
 
     output_filename = 'combined.pdf'
     merger.write(output_filename)
@@ -17,6 +22,4 @@ def combine_pdfs(directory):
 
     print('PDF files combined successfully into', output_filename)
 
-directory_path = 'PATH/TO/SAVE/COMBINDED/FILE'
-
-combine_pdfs(directory_path)
+combine_pdfs()
