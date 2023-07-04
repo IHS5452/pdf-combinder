@@ -1,8 +1,12 @@
-from PyPDF2 import PdfMerger
+from PyPDF2 import from PyPDF2 import PdfMerger
 
 def combine_pdfs():
-    merger = PdfMerger()
+    merger = from PyPDF2 import PdfMerger()
     file_number = 1
+
+    save_location = input("Enter the save location: ")
+    output_filename = input("Enter the output file name: ")
+    output_filepath = f"{save_location}/{output_filename}"
 
     while True:
         file_path = input(f"Enter path for PDF #{file_number} (or 'done' to finish): ")
@@ -16,10 +20,9 @@ def combine_pdfs():
         except FileNotFoundError:
             print("File not found. Please enter a valid file path.")
 
-    output_filename = 'combined.pdf'
-    merger.write(output_filename)
+    merger.write(output_filepath)
     merger.close()
 
-    print('PDF files combined successfully into', output_filename)
+    print('PDF files combined successfully. Output file:', output_filepath)
 
 combine_pdfs()
