@@ -1,7 +1,7 @@
-from PyPDF2 import from PyPDF2 import PdfMerger
+from PyPDF2 import PdfMerger
 
 def combine_pdfs():
-    merger = from PyPDF2 import PdfMerger()
+    merger = PdfMerger()
     file_number = 1
 
     save_location = input("Enter the save location: ")
@@ -12,6 +12,9 @@ def combine_pdfs():
         file_path = input(f"Enter path for PDF #{file_number} (or 'done' to finish): ")
         if file_path.lower() == "done":
             break
+
+        # Strip quotes from the file path
+        file_path = file_path.strip('\'"')
 
         try:
             merger.append(file_path)
